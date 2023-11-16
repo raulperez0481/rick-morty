@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+           * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+#result .card{
+    width: 300px;
+    border:1px solid red;
+}
+
+img {
+  width:100%;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div id="result">
+
+    </div>
+  
+<script>
+    const resultContainer = document.querySelector('#result');
+
+const fecthData= async () => {
+    try {
+            const response = await fetch('https://rickandmortyapi.com/api/character/2');
+            const data = await response.json();
+            console.log(data);
+            const characters = data.results;
+            resultContainer.innerHTML = '';
+              
+            resultContainer.innerHTML += `
+                <div class="card">
+                <img src="${data.image}" alt="${data.name}">
+                <h2>${data.name}</h2>
+                <p>${data.species} - ${data.gender}</p>
+                </div>`;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+fecthData()
+</script>
+</body>
+</html>
